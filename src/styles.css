@@ -1,1 +1,73 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+	background-color: #000000;
+	color: #ffffff;
+}
+
+hr {
+	border-color: #ffffff;
+}
+
+.table td,
+.table th {
+	vertical-align: middle;
+}
+
+.hide {
+	display: none;
+}
+
+.puntero {
+	cursor: pointer;
+}
+
+.img-circle {
+	border-radius: 100%;
+	width: 150px;
+}
+
+.card-title,
+.card-text {
+	color: #000000;
+}
+
+.badge {
+	margin-left: 5px;
+}
+
+.btn-outline-success {
+	margin-left: 5px;
+}
+
+.img-thumb {
+	height: 50px;
+	width: 50px;
+}
+
+.m-2-0 {
+	margin: 3em 2em;
+}
+
+.m-5 {
+	margin: 2em auto !important;
+}
+
+/* Animaciones */
+.animated {
+	animation-duration: 1.5s;
+	animation-fill-mode: both;
+}
+
+.fast {
+	animation-duration: 0.5s;
+	animation-fill-mode: both;
+}
+
+.fadein {
+	animation-name: fadein;
+}
+
+@keyframes fadein {
+	to {
+		opacity: 1;
+	}
+}

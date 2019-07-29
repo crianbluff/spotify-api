@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <div *ngFor="let item of items" class="my-3 animated fadein col-md-4 col-sm-6 col-xs-12">
+      <div class="card puntero">
+        <img [src]="item | noimage" [alt]="item.name" [title]="item.name" (click)="viewArtist(item)" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title">
+            {{ item.name }}
+          </h5>
+    
+          <p class="card-text">
+            <span class="badge badge-pill badge-primary" *ngFor="let artist of item.artists">
+              {{ artist.name }}
+            </span>
+          </p>
+
+          <iframe [src]="item.uri | domseguro" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

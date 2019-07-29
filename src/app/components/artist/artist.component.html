@@ -1,0 +1,106 @@
+<app-loading *ngIf="loadingArtist"></app-loading>
+
+<div class="row animated fadein" *ngIf="!loadingArtist">
+	<div class="col-2 my-auto">
+		<img [src]="artist | noimage" [alt]="artist.name" [title]="artist.name" class="img-thumbnail img-circle">
+	</div>
+
+	<div class="col my-auto">
+		<h3>
+			{{ artist.name }}
+		</h3>
+	</div>
+
+	<div class="col-4 my-auto text-right">
+		<p>
+			<a [href]="artist.external_urls.spotify" class="text-white text-decoration-none" target="_blank">
+				Ir a la página del artista
+			</a>
+		</p>
+	</div>
+</div>
+
+<app-loading *ngIf="loadingTopTracks"></app-loading>
+
+<div class="row m-5" *ngIf="!loadingTopTracks">
+	<div class="col">
+		<h1 class="text-center my-5">
+			Artista
+		</h1>
+
+		<div class="table-responsive text-center">
+			<table class="table table-dark">
+				<thead>
+					<tr>
+						<th>Foto</th>
+						<th>Canción</th>
+						<th>Álbum</th>
+						<th>Vista Previa</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr *ngFor="let track of topTracks">
+						<td>
+							<img [src]="track.album | noimage" [alt]="track.album.name" [title]="track.album.name" class="img-thumb">
+						</td>
+
+						<td> {{ track.name }} </td>
+
+						<td> {{track.album.name }} </td>
+
+						<td>
+							<iframe [src]="track.uri | domseguro" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+							<!-- <audio [src]="track.preview_url | noaudio" controls *ngIf="track.preview_url | noaudio"></audio>
+							<p *ngIf="!track.preview_url | noaudio">
+								No se encontro el audio correspondiente
+							</p> -->
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<app-loading *ngIf="loadingAlbums"></app-loading>
+
+<div class="row m-5" *ngIf="!loadingAlbums">
+	<div class="col">
+		<h1 class="text-center my-5">
+			Álbums
+		</h1>
+
+		<div class="table-responsive text-center">
+			<table class="table table-dark">
+				<thead>
+					<tr>
+						<th>Nombre Del Álbum</th>
+						<th>Artistas</th>
+						<th>Fecha De Creación</th>
+						<th>Número De Canciones</th>
+						<th>Vista Previa</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr *ngFor="let album of albums">
+						<td> {{ album.name }} </td>
+
+						<td>
+							<span class="badge badge-pill badge-primary" *ngFor="let artist of album.artists">
+								{{ artist.name }}
+							</span>
+						</td>
+
+						<td> {{ album.release_date }} </td>
+						<td> {{ album.total_tracks }} </td>
+						<td>
+							<iframe [src]="album.uri | domseguro" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

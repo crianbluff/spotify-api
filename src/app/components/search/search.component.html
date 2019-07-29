@@ -1,0 +1,38 @@
+<div class="row m-5">
+  <div class="col-md-12">
+    <input type="text" class="form-control" placeholder="Buscar Artista" (keyup.enter)="searchArtist(termArtist.value)" #termArtist>
+    <button type="button" class="btn btn-primary" (click)="searchArtist(termArtist.value)">
+      <i class="fa fa-search"></i>
+      Buscar
+    </button>
+  </div>
+
+  <div class="col-md-12">
+    <input type="text" class="form-control" placeholder="Buscar Canción" (keyup.enter)="searchTrack(termTrack.value)" #termTrack>
+    <button type="button" class="btn btn-primary" (click)="searchTrack(termTrack.value)">
+      <i class="fa fa-search"></i>
+      Buscar
+    </button>
+  </div>
+  
+</div>
+
+<app-loading *ngIf="loadingArtist"></app-loading>
+
+<h1>
+  Artistas
+</h1>
+
+<app-cards *ngIf="!loadingArtist" [items]="artists"></app-cards>
+<button (click)="prevArtist(); searchArtist(termArtist.value)" [ngClass]="{'hide': pagArtist <= 9}">Prev</button>
+<button (click)="nextArtist(); searchArtist(termArtist.value)">Next</button>
+
+<app-loading *ngIf="loadingTrack"></app-loading>
+
+<h1>
+  Canciones
+</h1>
+
+<app-cards *ngIf="!loadingTrack" [items]="tracks"></app-cards>
+<button (click)="prevTrack(); searchTrack(termTrack.value)" [ngClass]="{'hide': pagTrack <= 9}">Prev</button>
+<button (click)="nextTrack(); searchTrack(termTrack.value)">Next</button>
