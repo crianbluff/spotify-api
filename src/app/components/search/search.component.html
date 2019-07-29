@@ -1,38 +1,107 @@
 <div class="row m-5">
-  <div class="col-md-12">
-    <input type="text" class="form-control" placeholder="Buscar Artista" (keyup.enter)="searchArtist(termArtist.value)" #termArtist>
-    <button type="button" class="btn btn-primary" (click)="searchArtist(termArtist.value)">
-      <i class="fa fa-search"></i>
-      Buscar
-    </button>
+  <div class="col-md-6 col-sm-12 cols-xs-12">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" (keyup.enter)="searchArtist(termArtist.value, null)" #termArtist>
+      <div class="input-group-append">
+        <button type="button" class="btn btn-primary" (click)="searchArtist(termArtist.value, null)">
+          <i class="fa fa-search"></i>
+          Artista
+        </button>
+      </div>
+    </div>
   </div>
 
-  <div class="col-md-12">
-    <input type="text" class="form-control" placeholder="Buscar Canción" (keyup.enter)="searchTrack(termTrack.value)" #termTrack>
-    <button type="button" class="btn btn-primary" (click)="searchTrack(termTrack.value)">
-      <i class="fa fa-search"></i>
-      Buscar
-    </button>
+  <div class="col-md-6 col-sm-12 cols-xs-12">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" (keyup.enter)="searchTrack(termTrack.value, null)" #termTrack>
+      <div class="input-group-append">
+        <button type="button" class="btn btn-primary" (click)="searchTrack(termTrack.value, null)">
+          <i class="fa fa-search"></i>
+          Canción
+        </button>
+      </div>
+    </div>
   </div>
   
 </div>
 
-<app-loading *ngIf="loadingArtist"></app-loading>
 
-<h1>
-  Artistas
-</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <app-loading *ngIf="loadingArtist"></app-loading>
+      <app-cards *ngIf="!loadingArtist && artists.length !== 0" [items]="artists" titleCards="Artistas" columns="col-md-12 col-sm-12 col-xs-12"></app-cards>
+      <nav class="my-5">
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled" [ngClass]="{'disabled': pagArtist === 1}" *ngIf="totalArtist.length > 0">
+            <a class="page-link" href="javascript:void(0);" (click)="firstArtist(); searchArtist(termArtist.value)" title="Primera">
+              <i class="fa fa-angle-double-left"></i>
+            </a>
+          </li>
+      
+          <li class="page-item disabled" [ngClass]="{'disabled': pagArtist === 1}" *ngIf="totalArtist.length > 0">
+            <a class="page-link" href="javascript:void(0);" (click)="prevArtist(); searchArtist(termArtist.value)" title="Anterior">
+              <i class="fa fa-angle-left"></i>
+            </a>
+          </li>
+      
+          <li class="page-item" *ngFor="let item of totalArtist" [ngClass]="{'active': pagArtist === item}">
+            <a class="page-link" *ngIf="item >= minArtist && item <= maxArtist && item <= 1000" href="javascript:void(0);" (click)="goArtist(item); searchArtist(termArtist.value)">
+              {{ item }}
+            </a>
+          </li>
+      
+          <li class="page-item" *ngIf="totalArtist.length > 0" [ngClass]="{'disabled': pagArtist === totalArtist.length || pagArtist == 1000}">
+            <a class="page-link" href="javascript:void(0);" (click)="nextArtist(); searchArtist(termArtist.value)" title="Siguiente">
+              <i class="fa fa-angle-right"></i>
+            </a>
+          </li>
+      
+          <li class="page-item" *ngIf="totalArtist.length > 0" [ngClass]="{'disabled': pagArtist === totalArtist.length || pagArtist == 1000}">
+            <a class="page-link" href="javascript:void(0);" (click)="lastArtist(); searchArtist(termArtist.value)" title="Última">
+              <i class="fa fa-angle-double-right"></i>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
 
-<app-cards *ngIf="!loadingArtist" [items]="artists"></app-cards>
-<button (click)="prevArtist(); searchArtist(termArtist.value)" [ngClass]="{'hide': pagArtist <= 9}">Prev</button>
-<button (click)="nextArtist(); searchArtist(termArtist.value)">Next</button>
-
-<app-loading *ngIf="loadingTrack"></app-loading>
-
-<h1>
-  Canciones
-</h1>
-
-<app-cards *ngIf="!loadingTrack" [items]="tracks"></app-cards>
-<button (click)="prevTrack(); searchTrack(termTrack.value)" [ngClass]="{'hide': pagTrack <= 9}">Prev</button>
-<button (click)="nextTrack(); searchTrack(termTrack.value)">Next</button>
+    <div class="col-md-6">
+      <app-loading *ngIf="loadingTrack"></app-loading>
+      <app-cards *ngIf="!loadingTrack && tracks.length !== 0" [items]="tracks" titleCards="Canciones" columns="col-md-12 col-sm-12 col-xs-12"></app-cards>
+      <nav class="my-5">
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled" [ngClass]="{'disabled': pagTrack === 1}" *ngIf="totalTrack.length > 0">
+            <a class="page-link" href="javascript:void(0);" (click)="firstTrack(); searchTrack(termTrack.value, null)" title="Primera">
+              <i class="fa fa-angle-double-left"></i>
+            </a>
+          </li>
+      
+          <li class="page-item disabled" [ngClass]="{'disabled': pagTrack === 1}" *ngIf="totalTrack.length > 0">
+            <a class="page-link" href="javascript:void(0);" (click)="prevTrack(); searchTrack(termTrack.value)" title="Anterior">
+              <i class="fa fa-angle-left"></i>
+            </a>
+          </li>
+      
+          <li class="page-item" *ngFor="let item of totalTrack" [ngClass]="{'active': pagTrack === item}">
+            <a class="page-link" *ngIf="item >= minTrack && item <= maxTrack && item <= 1000" href="javascript:void(0);" (click)="goTrack(item); searchTrack(termTrack.value)">
+              {{ item }}
+            </a>
+          </li>
+      
+          <li class="page-item" *ngIf="totalTrack.length > 0" [ngClass]="{'disabled': pagTrack === totalTrack.length || pagTrack == 1000}">
+            <a class="page-link" href="javascript:void(0);" (click)="nextTrack(); searchTrack(termTrack.value)" title="Siguiente">
+              <i class="fa fa-angle-right"></i>
+            </a>
+          </li>
+      
+          <li class="page-item" *ngIf="totalTrack.length > 0" [ngClass]="{'disabled': pagTrack === totalTrack.length || pagTrack == 1000}">
+            <a class="page-link" href="javascript:void(0);" (click)="lastTrack(); searchTrack(termTrack.value)" title="Última">
+              <i class="fa fa-angle-double-right"></i>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>

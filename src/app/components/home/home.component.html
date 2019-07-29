@@ -10,4 +10,4 @@
 	</p>
 </div>
 
-<app-cards [items]="newsSongs"></app-cards>
+<app-cards *ngIf="!loading && newsSongs.length !== 0" [items]="newsSongs" titleCards="Nuevos Lanzamientos" columns="col-md-4 col-sm-6 col-xs-12"></app-cards>

@@ -1,6 +1,10 @@
 <div class="container">
+  <h1 class="color-white text-center my-5">
+    {{ titleCards }}
+  </h1>
+
   <div class="row">
-    <div *ngFor="let item of items" class="my-3 animated fadein col-md-4 col-sm-6 col-xs-12">
+    <div *ngFor="let item of items" class="my-3 animated fadein" [ngClass]="columns">
       <div class="card puntero">
         <img [src]="item | noimage" [alt]="item.name" [title]="item.name" (click)="viewArtist(item)" class="card-img-top">
         <div class="card-body">
@@ -14,7 +18,7 @@
             </span>
           </p>
 
-          <iframe [src]="item.uri | domseguro" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+          <iframe [src]="item.uri | domseguro" width="100%" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
         </div>
 
       </div>

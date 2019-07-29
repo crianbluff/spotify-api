@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 export class CardsComponent {
 
   @Input() items:any[] = [];
+  @Input() titleCards:string;
+  @Input() columns:string;
 
   constructor( private router:Router ) { }
 

@@ -21,7 +21,7 @@ export class SpotifyService {
   }
 
   getNewReleases() {
-    return this.getQuery('browse/new-releases?limit=10')
+    return this.getQuery('browse/new-releases?limit=10&offset=20')
     .pipe( map( data => data['albums'].items ));
   }
 
@@ -36,12 +36,12 @@ export class SpotifyService {
 
   getArtists(term:string, number:string) {
     return this.getQuery(`search?q=${term}&type=artist&limit=10&offset=${number}`)
-    .pipe( map( data => data['artists'].items ));
+    .pipe( map( data =>  data['artists'] ));
   }
   
   getTracks(term:string, number:string) {
     return this.getQuery(`search?q=${term}&type=track&limit=10&offset=${number}`)
-    .pipe( map( data => data['tracks'].items ));
+    .pipe( map( data => data['tracks'] ));
   }
   
   getTopTracks(id:string) {
