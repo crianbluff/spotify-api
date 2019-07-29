@@ -19,8 +19,6 @@ export class SearchComponent {
   prevArtist() {
     if ( this.pagArtist >= 10  ) {
       this.pagArtist = this.pagArtist - 10;
-    } else {
-      this.pagArtist = 0;
     }
   }
 
@@ -31,8 +29,6 @@ export class SearchComponent {
   prevTrack() {
     if ( this.pagTrack >= 10  ) {
       this.pagTrack = this.pagTrack - 10;
-    } else {
-      this.pagTrack = 0;
     }
   }
 
@@ -41,7 +37,7 @@ export class SearchComponent {
   }
 
   searchArtist(termArtist:string, number = this.pagArtist.toString()) {
-    this.pagArtist = 0;
+    // this.pagArtist = 0;
 
     if ( termArtist === '' ) {
       return false;
@@ -58,7 +54,7 @@ export class SearchComponent {
   }
 
   searchTrack(termTrack:string, number = this.pagTrack.toString()) {
-    this.pagTrack = 0;
+    // this.pagTrack = 0;
 
     if ( termTrack === '' ) {
       return false;
