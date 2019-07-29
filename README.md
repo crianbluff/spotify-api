@@ -11,5 +11,6 @@ Prueba realizada en Angular.
 2. Ubicarse en la raíz del proyecto e insertar el código `npm install`.
 3. Insertar el código `ng serve -o` para iniciar el servidor angular.
 4. Ir a la dirección  `http://localhost:4200/` en el navegador.
+5. Links del proyecto funcionando `http://spotify-api.test.crianbluff.com/`
 
 Cualquier duda comunicarse al 310 809 8793, enviar un correo a crianbluff77@gmail.com o enviar un [whatsapp](https://api.whatsapp.com/send?phone=573108098793).
