@@ -1,4 +1,4 @@
-<app-loading *ngIf="loading"></app-loading>
+<app-loading *ngIf="isLoadingReleases"></app-loading>
 
 <div class="alert alert-danger animated fadein" *ngIf="error">
 	<h3>
@@ -10,4 +10,38 @@
 	</p>
 </div>
 
-<app-cards *ngIf="!loading && newsSongs.length !== 0" [items]="newsSongs" titleCards="Nuevos Lanzamientos" columns="col-md-4 col-sm-6 col-xs-12"></app-cards>
+<app-cards *ngIf="!isLoadingReleases && releases.length !== 0" [items]="releases" titleCards="Nuevos Lanzamientos" columns="col-md-4 col-sm-6 col-xs-12"></app-cards>
+
+<nav class="my-5" *ngIf="!isLoadingReleases && releases.length !== 0">
+	<ul class="pagination justify-content-center">
+		<li class="page-item disabled" [ngClass]="{'disabled': pagRelease === 1}" *ngIf="releases.length > 0">
+			<a class="page-link" href="javascript:void(0);" (click)="firstRelease(); getNewReleases(0)" title="Primera">
+				<i class="fa fa-angle-double-left"></i>
+			</a>
+		</li>
+
+		<li class="page-item disabled" [ngClass]="{'disabled': pagRelease === 1}">
+			<a class="page-link" href="javascript:void(0);" (click)="getNewReleases(pagRelease * releases.length - releases.length * 2); prevRelease()" title="Anterior">
+				<i class="fa fa-angle-left"></i>
+			</a>
+		</li>
+
+		<li class="page-item" *ngFor="let releasesQuantity of [].constructor(totalReleases); index as i" [ngClass]="{'active': pagRelease === i + 1}">
+			<a class="page-link" href="javascript:void(0);" (click)="getNewReleases(releases.length * i); goRelease(i + 1)">
+				{{ i + 1 }}
+			</a>
+		</li>
+
+		<li class="page-item" [ngClass]="{'disabled': pagRelease === releases.length || pagRelease == 1000}">
+			<a class="page-link" href="javascript:void(0);" (click)="nextRelease(); getNewReleases(pagRelease * releases.length - releases.length)" title="Siguiente">
+				<i class="fa fa-angle-right"></i>
+			</a>
+		</li>
+
+		<li class="page-item" [ngClass]="{'disabled': pagRelease === releases.length || pagRelease == 1000}">
+			<a class="page-link" href="javascript:void(0);" (click)="lastRelease(); getNewReleases(totalReleases * releases.length - releases.length)" title="Última">
+				<i class="fa fa-angle-double-right"></i>
+			</a>
+		</li>
+	</ul>
+</nav>

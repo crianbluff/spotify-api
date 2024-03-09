@@ -29,8 +29,20 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6">
-      <app-loading *ngIf="loadingArtist"></app-loading>
-      <app-cards *ngIf="!loadingArtist && artists.length !== 0" [items]="artists" titleCards="Artistas" columns="col-md-12 col-sm-12 col-xs-12"></app-cards>
+      <app-loading *ngIf="isLoadingArtist"></app-loading>
+
+      <app-cards *ngIf="!isLoadingArtist && artists.length !== 0" [items]="artists" titleCards="Artistas" columns="col-md-12 col-sm-12 col-xs-12"></app-cards>
+
+      <div class="alert alert-danger animated fadein" *ngIf="isErrorArtist">
+        <h3>
+          Error
+        </h3>
+      
+        <p>
+          {{ errorArtistMessage }}
+        </p>
+      </div>
+
       <nav class="my-5">
         <ul class="pagination justify-content-center">
           <li class="page-item disabled" [ngClass]="{'disabled': pagArtist === 1}" *ngIf="totalArtist.length > 0">
@@ -67,8 +79,20 @@
     </div>
 
     <div class="col-md-6">
-      <app-loading *ngIf="loadingTrack"></app-loading>
-      <app-cards *ngIf="!loadingTrack && tracks.length !== 0" [items]="tracks" titleCards="Canciones" columns="col-md-12 col-sm-12 col-xs-12"></app-cards>
+      <app-loading *ngIf="isLoadingTrack"></app-loading>
+
+      <app-cards *ngIf="!isLoadingTrack && tracks.length !== 0" [items]="tracks" titleCards="Canciones" columns="col-md-12 col-sm-12 col-xs-12"></app-cards>
+
+      <div class="alert alert-danger animated fadein" *ngIf="isErrorTracks">
+        <h3>
+          Error
+        </h3>
+      
+        <p>
+          {{ errorTracksMessage }}
+        </p>
+      </div>
+      
       <nav class="my-5">
         <ul class="pagination justify-content-center">
           <li class="page-item disabled" [ngClass]="{'disabled': pagTrack === 1}" *ngIf="totalTrack.length > 0">

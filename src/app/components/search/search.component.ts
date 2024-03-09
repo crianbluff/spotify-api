@@ -9,18 +9,32 @@ export class SearchComponent {
 
   artists:any[] = [];
   tracks:any[] = [];
-  loadingArtist:boolean;
-  loadingTrack:boolean;
+
+  // Loading
+  isLoadingArtist:boolean = false;
+  isLoadingTrack:boolean = false;
+  
+  // Pag
   pagArtist:number = 1;
   pagTrack:number = 1;
+  
   totalArtist:any = [];
   totalTrack:any = [];
+
   nameArtist:string;
   nameTrack:string;
+
+  // Min & Max
   minArtist:any;
   minTrack:any;
   maxArtist:any;
   maxTrack:any;
+
+  // Errors
+  isErrorArtist:boolean = false;
+  isErrorTracks:boolean = false;
+  errorArtistMessage:string;
+  errorTracksMessage:string;
 
   constructor(private spotify: SpotifyService) { }
 
@@ -61,6 +75,8 @@ export class SearchComponent {
   }
 
   searchArtist(termArtist:string, number) {
+    this.isLoadingArtist = true;
+
     if ( termArtist === '' ) {
       return false;
     }
@@ -69,25 +85,29 @@ export class SearchComponent {
       this.nameArtist = termArtist;
       this.pagArtist = 1;
     }
-    
-    this.loadingArtist = true;
 
     number = (this.pagArtist - 1) * 10;
-
     this.paginationArtist();
 
     this.spotify.getArtists(termArtist, number.toString())
-    .subscribe( (data:any) => {
-      // console.log(data);
-      this.artists = data.items;
-      this.loadingArtist = false;
+    .subscribe(
+      (data:any) => {
+        this.artists = data.items;
+        this.isLoadingArtist = false;
 
-      this.totalArtist = [];
-      for (let i = 0; i < data.total / 10; i++) {
-        this.totalArtist.push(i + 1);
+        this.totalArtist = [];
+        for (let i = 0; i < data.total / 10; i++) {
+          this.totalArtist.push(i + 1);
+        }
+      },
+      
+      (error:any) => {
+        this.artists = [];
+        this.isErrorArtist = true;
+        this.isLoadingArtist = false;
+        this.errorArtistMessage = error.error.error.message;
       }
-      // console.log(this.totalArtist);
-    });
+    );
   }
 
   firstTrack() {
@@ -127,6 +147,8 @@ export class SearchComponent {
   }
 
   searchTrack(termTrack:string, number) {
+    this.isLoadingTrack = true;
+
     if ( termTrack === '' ) {
       return false;
     }
@@ -136,24 +158,28 @@ export class SearchComponent {
       this.pagTrack = 1;
     }
     
-    this.loadingTrack = true;
-
     number = (this.pagTrack - 1) * 10;
-
     this.paginationTrack();
 
     this.spotify.getTracks(termTrack, number.toString())
-    .subscribe( (data:any) => {
-      // console.log(data);
-      this.tracks = data.items;
-      this.loadingTrack = false;
+    .subscribe(
+      (data:any) => {
+        this.tracks = data.items;
+        this.isLoadingTrack = false;
 
-      this.totalTrack = [];
-      for (let i = 0; i < data.total / 10; i++) {
-        this.totalTrack.push(i + 1);
+        this.totalTrack = [];
+        for (let i = 0; i < data.total / 10; i++) {
+          this.totalTrack.push(i + 1);
+        }
+      },
+
+      (error:any) => {
+        this.tracks = [];
+        this.isErrorTracks = true;
+        this.isLoadingTrack = false;
+        this.errorTracksMessage = error.error.error.message;
       }
-      console.log(this.totalTrack);
-    });
+    );
   }
 
 }

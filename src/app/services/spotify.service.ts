@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { environment } from '../../environments/environment.prod';
+import { environment } from '../../environments/environment';
 
 
 @Injectable({
@@ -20,9 +20,9 @@ export class SpotifyService {
     return this.http.get(url , {headers});
   }
 
-  getNewReleases() {
-    return this.getQuery('browse/new-releases?limit=10&offset=20')
-    .pipe( map( data => data['albums'].items ));
+  getNewReleases(number?:number) {
+    return this.getQuery(`browse/new-releases?limit=10&offset=${number}`)    
+    .pipe( map( data => data['albums'] ));
   }
 
   getAlbums(id:string) {

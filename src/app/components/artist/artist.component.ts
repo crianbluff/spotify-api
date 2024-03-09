@@ -32,7 +32,6 @@ export class ArtistComponent {
     this.loadingArtist = true;
     this.spotify.getArtist(id)
     .subscribe( artist => {
-      // console.log(artist);
       this.artist = artist;
       this.loadingArtist = false;
     });
@@ -42,7 +41,6 @@ export class ArtistComponent {
     this.loadingAlbums = true;
     this.spotify.getAlbums(id)
     .subscribe( album => {
-      // console.log(album);
       this.albums = album;
       this.loadingAlbums = false;
     });
@@ -52,7 +50,6 @@ export class ArtistComponent {
     this.loadingTopTracks = true;
     this.spotify.getTopTracks(id)
     .subscribe( topTracks => {
-      // console.log(topTracks);
       this.topTracks = topTracks;
       this.loadingTopTracks = false;
     });
