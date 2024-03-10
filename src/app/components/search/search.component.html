@@ -5,7 +5,7 @@
       <div class="input-group-append">
         <button type="button" class="btn btn-primary" (click)="searchArtist(termArtist.value, null)">
           <i class="fa fa-search"></i>
-          Artista
+          Artist
         </button>
       </div>
     </div>
@@ -17,7 +17,7 @@
       <div class="input-group-append">
         <button type="button" class="btn btn-primary" (click)="searchTrack(termTrack.value, null)">
           <i class="fa fa-search"></i>
-          Canción
+          Song
         </button>
       </div>
     </div>
@@ -31,7 +31,7 @@
     <div class="col-md-6">
       <app-loading *ngIf="isLoadingArtist"></app-loading>
 
-      <app-cards *ngIf="!isLoadingArtist && artists.length !== 0" [items]="artists" titleCards="Artistas" columns="col-md-12 col-sm-12 col-xs-12"></app-cards>
+      <app-cards *ngIf="!isLoadingArtist && artists.length !== 0" [items]="artists" titleCards="Artist" columns="col-md-12 col-sm-12 col-xs-12"></app-cards>
 
       <div class="alert alert-danger animated fadein" *ngIf="isErrorArtist">
         <h3>
@@ -81,7 +81,7 @@
     <div class="col-md-6">
       <app-loading *ngIf="isLoadingTrack"></app-loading>
 
-      <app-cards *ngIf="!isLoadingTrack && tracks.length !== 0" [items]="tracks" titleCards="Canciones" columns="col-md-12 col-sm-12 col-xs-12"></app-cards>
+      <app-cards *ngIf="!isLoadingTrack && tracks.length !== 0" [items]="tracks" titleCards="Songs" columns="col-md-12 col-sm-12 col-xs-12"></app-cards>
 
       <div class="alert alert-danger animated fadein" *ngIf="isErrorTracks">
         <h3>
