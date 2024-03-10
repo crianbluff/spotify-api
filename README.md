@@ -7,9 +7,9 @@
 Prueba realizada en Angular.
 
 
-1. Clonar repositorio remoto `https://github.com/crianbluff/spotify-api.git` o descargarlo en archivo .zip y descomprimir.
-2. Ubicarse en la raíz del proyecto e insertar el código `npm install`.
-3. Insertar el código `ng serve -o` para iniciar el servidor angular.
-4. Go  `http://localhost:4200/` en el navegador.
+1. Clone the repository `https://github.com/crianbluff/spotify-api.git` or download it in .zip and unzip.
+2. Place on the root and execute `npm install`.
+3. Insert `ng serve -o` to run the project locally.
+4. Go to `http://localhost:4200/` on the browser.
 
-Cualquier duda enviar un correo a crianbluff77@gmail.com o enviar un [whatsapp](https://api.whatsapp.com/send?phone=573108098793).
+Any question must be sent to the follow email crianbluff77@gmail.com or send a message on [whatsapp](https://api.whatsapp.com/send?phone=573108098793).
